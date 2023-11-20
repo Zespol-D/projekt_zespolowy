@@ -1,4 +1,4 @@
-package com.example.projekt_zespolowy
+package com.example.projekt_zespolowy.components
 
 
 import androidx.compose.foundation.background
@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.compose.rememberNavController
+import com.example.projekt_zespolowy.Location
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -217,7 +218,7 @@ fun TopBar(contentPadding: PaddingValues,
                 horizontalArrangement = Arrangement.Center
             ) {
 
-                // zawartość topbara
+                // wywołanie zawartości TopBar
                 when (currentLocation) {
 
                     Location.HOME -> {
@@ -258,7 +259,7 @@ fun TopBarPreview() {
         scope = rememberCoroutineScope(),
         drawerState = rememberDrawerState(DrawerValue.Closed),
         onClick = { },
-        currentLocation = Location.ADD_COURSE,
+        currentLocation = Location.PROFILE,
         infoContainers = emptyList(),
     )
 }

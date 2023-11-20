@@ -20,10 +20,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
-import com.example.projekt_zespolowy.DrawerContent
 import com.example.projekt_zespolowy.Location
-import com.example.projekt_zespolowy.TopBar
-import com.example.projekt_zespolowy.infoContainers
+import com.example.projekt_zespolowy.components.DrawerContent
+import com.example.projekt_zespolowy.components.TopBar
+import com.example.projekt_zespolowy.components.infoContainers
 
 @Composable
 fun showToast(context: Context, message: String) {

@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                             })
                         }
                         composable("detaleKursu"){
-                            CourseDetails(onClick = {
+                            CourseDetails(context = context, onClick = {
                                 navController.navigate(it)
                             })
                         }

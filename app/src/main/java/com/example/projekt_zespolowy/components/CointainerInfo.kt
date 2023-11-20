@@ -1,4 +1,4 @@
-package com.example.projekt_zespolowy
+package com.example.projekt_zespolowy.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

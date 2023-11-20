@@ -1,4 +1,4 @@
-package com.example.projekt_zespolowy
+package com.example.projekt_zespolowy.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
+import com.example.projekt_zespolowy.Location
 
 
 // to jest zawartość wysuwanego elementu od boku
