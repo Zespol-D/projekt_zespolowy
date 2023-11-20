@@ -4,7 +4,6 @@ import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.Location
+import com.example.projekt_zespolowy.components.Confirmed
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
 import com.example.projekt_zespolowy.components.infoContainers
@@ -51,6 +52,10 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val currentLocation by remember { mutableStateOf(Location.COURSE_DETAILS) } // tutaj zmiana stanu ikony na wypełnioną
+    // MutableState to manage the confirmation state
+    var isConfirmed by remember { mutableStateOf(false) }
+    var isClicked by remember { mutableStateOf(false) }
+
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -82,48 +87,72 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
                         containerColor = MaterialTheme.colorScheme.tertiaryContainer
                     )
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(550.dp)
-                            .padding(10.dp)
-                            .clickable {
-                                onClick("detaleKursu")
-                                Toast
-                                    .makeText(
-                                        context,
-                                        "Clicked!",
-                                        Toast.LENGTH_SHORT
-                                    )
-                                    .show()
-                            }
-                            .background(
-                                MaterialTheme.colorScheme.surface,
-                                shape = MaterialTheme.shapes.medium
-                            )
-                            .border(
-                                1.dp,
-                                MaterialTheme.colorScheme.onSurface,
-                                shape = MaterialTheme.shapes.medium
-                            )
-
-                    ) {
-                        Column(
+                    if (isConfirmed) {
+                        Box(
                             modifier = Modifier
-                                .padding(16.dp)
-                                .fillMaxWidth(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
+                                .fillMaxWidth()
+                                .height(550.dp)
+                                .padding(10.dp)
+                                .background(
+                                    MaterialTheme.colorScheme.surface,
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                                .border(
+                                    1.dp,
+                                    MaterialTheme.colorScheme.onSurface,
+                                    shape = MaterialTheme.shapes.medium
+                                )
                         ) {
-                            Text( text = "",
-                                fontSize = 14.sp,
-                                textAlign = TextAlign.Center,
-                            )
-                            Text(text = "Organizator kursu")
-                            Text(text = "Data_rozpoczęcia")
-                            Text(text = "Data_zakończenia")
-                            Text(text = "Cena_za_udział")
+                            Column(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .fillMaxWidth(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "",
+                                    fontSize = 14.sp,
+                                    textAlign = TextAlign.Center,
+                                )
+                                Confirmed()
+                            }
+                        }
 
+                    } else {
+                        // Zawartość ekranu pod paskiem
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(550.dp)
+                                .padding(10.dp)
+                                .background(
+                                    MaterialTheme.colorScheme.surface,
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                                .border(
+                                    1.dp,
+                                    MaterialTheme.colorScheme.onSurface,
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .fillMaxWidth(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "",
+                                    fontSize = 14.sp,
+                                    textAlign = TextAlign.Center,
+                                )
+                                Text(text = "Organizator kursu")
+                                Text(text = "Data_rozpoczęcia")
+                                Text(text = "Data_zakończenia")
+                                Text(text = "Cena_za_udział")
+                            }
                         }
                     }
                     Row(
@@ -135,18 +164,33 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
                     ) {
                         OutlinedButton(
                             onClick = {
-
+                                onClick("glownyEkran")
                             }
                         ) {
                             Text(text = "Zamknij")
                         }
-                        Spacer(modifier = Modifier.fillMaxHeight().width(80.dp))
+                        Spacer(modifier = Modifier
+                            .fillMaxHeight()
+                            .width(80.dp)
+                        )
                         OutlinedButton(
                             onClick = {
-
+                                if (!isClicked) {
+                                    isConfirmed = true
+                                }
+                                else {
+                                    Toast
+                                        .makeText(
+                                            context,
+                                            "Już zapisano na kurs",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                }
+                                isClicked = true
                             }
                         ) {
                             Text(text = "Zapisz się")
+
                         }
                     }
                 }
