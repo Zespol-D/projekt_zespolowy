@@ -40,10 +40,9 @@ fun Confirmed() {
         delay(2000) // Symulacja 2-sekundowego opóźnienia
         // Ustawienie stanu animacji i potwierdzenia po zakończeniu operacji
         isAnimationComplete = true
-        // delay(2000) // Poczekaj dodatkowe 2 sekundy po animacji ładowania
         isConfirmed = true
-        delay(2000) // Poczekaj dodatkowe 2 sekundy po potwierdzeniu
-        // Po zakończeniu wszystkich etapów, wywołaj onClick("MainScreen1")
+        delay(2000) // dodatkowe 2 sekundy po potwierdzeniu
+
         // navController.navigate("MainScreen1")
     }
 
@@ -101,7 +100,7 @@ fun Confirmed() {
 
 @Composable
 fun Failed() {
-    // Tu można dodać obsługę sytuacji, gdy zapisanie na kurs się nie powiedzie
+    // Tu będzie obsługa sytuacji, gdy zapisanie na kurs się nie powiedzie
 }
 
 @Preview
