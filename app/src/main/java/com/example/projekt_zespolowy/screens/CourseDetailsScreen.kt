@@ -141,17 +141,33 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
                                     .padding(16.dp)
                                     .fillMaxWidth(),
                                 verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                horizontalAlignment = Alignment.Start
                             ) {
-                                Text(
-                                    text = "",
-                                    fontSize = 14.sp,
-                                    textAlign = TextAlign.Center,
+                                Text(text = "Organizator:",
+                                    modifier = Modifier
+                                        .padding(start = 16.dp, bottom = 10.dp),
+                                    textAlign = TextAlign.Start,
+                                    fontSize = 15.sp
                                 )
-                                Text(text = "Organizator kursu")
-                                Text(text = "Data_rozpoczęcia")
-                                Text(text = "Data_zakończenia")
-                                Text(text = "Cena_za_udział")
+                                Text(text = "Data rozpoczęcia:",
+                                    modifier = Modifier
+                                        .padding(start = 16.dp, bottom = 10.dp),
+                                    textAlign = TextAlign.Start,
+                                    fontSize = 15.sp
+                                )
+                                Text(text = "Data zakończenia:",
+                                    modifier = Modifier
+                                        .padding(start = 16.dp, bottom = 10.dp),
+                                    textAlign = TextAlign.Start,
+                                    fontSize = 15.sp
+                                )
+
+                                Text(text = "Cena zaudział:",
+                                    modifier = Modifier
+                                        .padding(start = 16.dp, bottom = 10.dp),
+                                    textAlign = TextAlign.Start,
+                                    fontSize = 15.sp
+                                )
                             }
                         }
                     }
@@ -163,6 +179,9 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         OutlinedButton(
+                            modifier = Modifier
+                            .width(width = 120.dp)
+                            .height(height = 50.dp),
                             onClick = {
                                 onClick("glownyEkran")
                             }
@@ -173,7 +192,9 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
                             .fillMaxHeight()
                             .width(80.dp)
                         )
-                        OutlinedButton(
+                        OutlinedButton( modifier = Modifier
+                            .width(width = 120.dp)
+                            .height(height = 50.dp),
                             onClick = {
                                 if (!isClicked) {
                                     isConfirmed = true
