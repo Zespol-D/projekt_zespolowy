@@ -61,7 +61,8 @@ fun DrawerContent(currentLocation: Location, onClick: (String) -> Unit) {
             }
             FilledTonalButton(
                 modifier = Modifier
-                    .width(182.dp),
+                    .width(182.dp)
+                    .height(47.dp),
                 onClick = {
 
                     onClick("glownyEkran")
@@ -82,13 +83,14 @@ fun DrawerContent(currentLocation: Location, onClick: (String) -> Unit) {
 
             Spacer(
                 modifier = Modifier
-                    .height(4.dp)
+                    .height(16.dp)
                     .fillMaxWidth()
             )
 
             FilledTonalButton(
                 modifier = Modifier
-                    .width(182.dp),
+                    .width(182.dp)
+                    .height(47.dp),
                 onClick = {
                     onClick("dodajKurs")
                 }) {
@@ -107,13 +109,14 @@ fun DrawerContent(currentLocation: Location, onClick: (String) -> Unit) {
 
             Spacer(
                 modifier = Modifier
-                    .height(4.dp)
+                    .height(16.dp)
                     .fillMaxWidth()
             )
 
             FilledTonalButton(
                 modifier = Modifier
-                    .width(182.dp),
+                    .width(182.dp)
+                    .height(47.dp),
                 onClick = {
                     onClick("profil")
                 }) {
@@ -149,7 +152,8 @@ fun DrawerContent(currentLocation: Location, onClick: (String) -> Unit) {
 
                 FilledTonalButton(
                     modifier = Modifier
-                        .width(182.dp),
+                        .width(182.dp)
+                        .height(47.dp),
                     onClick = {
                         setShowLogoutDialog(true) // zmienną stanu wyświetlany jest dialog
                     }) {
