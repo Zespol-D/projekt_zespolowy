@@ -58,6 +58,7 @@ dependencies {
     implementation("androidx.tv:tv-material:1.0.0-alpha10")
     implementation ("com.microsoft.sqlserver:mssql-jdbc:12.4.2.jre11")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22")
+    implementation("androidx.core:core-i18n:1.0.0-alpha01")
 
     annotationProcessor("androidx.room:room-compiler:2.6.0")
 
