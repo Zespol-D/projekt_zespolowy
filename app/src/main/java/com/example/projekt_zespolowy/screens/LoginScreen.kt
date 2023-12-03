@@ -270,7 +270,6 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
                             label = "CrossfadeLabel"
                         ) { targetVisibleState ->
                             val currentImageVector = if (targetVisibleState) imageVectorOn else imageVectorOff
-
                             Icon(
                                 painter = currentImageVector,
                                 contentDescription = null,
@@ -322,7 +321,8 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
                     text = annotatedText,
                     onClick = {
 
-                    })
+                    }
+                )
             }
         }
     }
