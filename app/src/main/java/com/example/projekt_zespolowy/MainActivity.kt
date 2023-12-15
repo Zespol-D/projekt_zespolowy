@@ -42,6 +42,9 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate(it)
                             })
                         }
+
+                        // kolejne definicje tras nawigacji
+
                         composable("rejestracja"){
                             RegisterScreen(context = context, onClick = {
                                 navController.navigate(it)
