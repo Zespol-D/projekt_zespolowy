@@ -281,9 +281,9 @@ fun AddCourse(onClick: (String) -> Unit) {
                             },
                             onDateSelected = { date ->
                                 if (isStartDateClicked) {
-                                    startDate = "${date.third}-${date.second + 1}-${date.first}"
+                                    startDate = "${date.third}.${date.second + 1}.${date.first}"
                                 } else if (isEndDateClicked) {
-                                    endDate = "${date.third}-${date.second + 1}-${date.first}"
+                                    endDate = "${date.third}.${date.second + 1}.${date.first}"
                                 }
                                 isStartDateClicked = false
                                 isEndDateClicked = false

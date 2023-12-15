@@ -177,6 +177,7 @@ fun TopBar(contentPadding: PaddingValues,
            infoContainers: List<ContainerInfo>,
            onClick: (String) -> Unit
 ) {
+    // kod całej kompozycji
     Column(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background),
@@ -259,7 +260,7 @@ fun TopBarPreview() {
         scope = rememberCoroutineScope(),
         drawerState = rememberDrawerState(DrawerValue.Closed),
         onClick = { },
-        currentLocation = Location.PROFILE,
+        currentLocation = Location.HOME,
         infoContainers = emptyList(),
     )
 }

@@ -20,7 +20,7 @@ data class ContainerInfo(val text: String) {
 // zawartość chipsików
 val infoContainers = listOf(
     ContainerInfo("#Najlepszy"),
-    ContainerInfo("#Najgorszy"),
+    ContainerInfo("#OstatnieMiejsca"),
     ContainerInfo("#Najnowszy"),
     ContainerInfo("#Najstarszy"),
     ContainerInfo("#Wolne"),
@@ -33,7 +33,7 @@ val selectedInfoContainers = mutableStateListOf<ContainerInfo>()
 @Composable
 fun InfoContainer(info: ContainerInfo) {
     val selectedState = info.selectedState
-
+    // kod kompozycji
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
