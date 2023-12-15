@@ -143,7 +143,7 @@ fun MainScreen1(onClick: (String) -> Unit) {
 
                     LaunchedEffect(true) {
                         val fetchedCourses = withContext(Dispatchers.IO) {
-                            DatabaseRepository.getCourses()
+                            //DatabaseRepository.getCourses()
                         }
 
                         courses = fetchedCourses

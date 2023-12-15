@@ -88,4 +88,11 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+    //ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+    //jtds libs
+    implementation(files("libs/jtds-1.3.1.jar"))
 }
