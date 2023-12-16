@@ -19,12 +19,11 @@ data class ContainerInfo(val text: String) {
 }
 // zawartość chipsików
 val infoContainers = listOf(
-    ContainerInfo("#Najlepszy"),
-    ContainerInfo("#OstatnieMiejsca"),
+    ContainerInfo("#Organizator"),
     ContainerInfo("#Najnowszy"),
     ContainerInfo("#Najstarszy"),
-    ContainerInfo("#Wolne"),
-    ContainerInfo("#Ekskluzywne")
+    ContainerInfo("#Najtańszy"),
+    ContainerInfo("#Najdroższy")
 )
 
 val selectedInfoContainers = mutableStateListOf<ContainerInfo>()
