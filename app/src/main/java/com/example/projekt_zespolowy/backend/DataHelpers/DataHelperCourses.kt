@@ -61,7 +61,7 @@ class DatabaseHelperCourses {
         }
     }
     fun getCustomers(){
-        query ="select * from Courses "
+        query ="SELECT * FROM Courses"
         SyncData().execute("")
     }
 }

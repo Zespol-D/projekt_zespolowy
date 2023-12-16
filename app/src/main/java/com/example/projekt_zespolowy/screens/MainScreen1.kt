@@ -81,7 +81,6 @@ fun MainScreen1(onClick: (String) -> Unit) {
                             style = TextStyle(fontWeight = FontWeight.ExtraBold)
                         )
                     }
-
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Top,

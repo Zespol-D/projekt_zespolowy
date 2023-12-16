@@ -1,5 +1,6 @@
 package com.example.projekt_zespolowy
 
+import Connection
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.projekt_zespolowy.backend.DataHelpers.DatabaseHelperCourses
 import com.example.projekt_zespolowy.screens.AddCourse
 import com.example.projekt_zespolowy.screens.CourseDetails
 import com.example.projekt_zespolowy.screens.HomeScreen
@@ -22,8 +24,12 @@ import com.example.projekt_zespolowy.screens.RegisterScreen
 import com.example.projekt_zespolowy.screens.YourProfile
 import com.example.projekt_zespolowy.ui.theme.Projekt_zespolowyTheme
 
+val dbCouses: DatabaseHelperCourses = DatabaseHelperCourses()
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        dbCouses.connection = Connection()
+        dbCouses.getCustomers()
+
         super.onCreate(savedInstanceState)
         setContent {
             Projekt_zespolowyTheme {
