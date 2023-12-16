@@ -95,11 +95,14 @@ fun MainScreen1(onClick: (String) -> Unit) {
                                     .fillMaxWidth()
                                     .padding(8.dp)
                                     .clickable {
+
+                                        //Co robi tan onclikc i czy może przekazywać więcej wartości niż ta jedna?
                                         onClick("detaleKursu")
                                         Toast
                                             .makeText(
                                                 context,
-                                                "Kliknięto element $index",
+                                                //Zamieniłem na nazwe kursu by łatwiej zobaczyć czy poprawnie zintegrowane
+                                                "Kliknięto element ${dbCouses.records[index].Course_name}",
                                                 Toast.LENGTH_SHORT
                                             )
                                             .show()
@@ -123,10 +126,12 @@ fun MainScreen1(onClick: (String) -> Unit) {
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
                                     Text(
-                                        text = "Kurs nazwa: ${dbCouses.records[index].Course_name}",
+                                        //Nazwa kusu
+                                        text = "${dbCouses.records[index].Course_name}",
                                         fontSize = 14.sp,
                                         textAlign = TextAlign.Center,
                                     )
+                                    //Dane kusu są w tablicy records !!
                                     Text(text = dbCouses.records[index].Start_date)
                                     Text(text = dbCouses.records[index].End_date)
                                     Text(text = dbCouses.records[index].Organizer_name)

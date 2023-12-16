@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.Location
+import com.example.projekt_zespolowy.backend.dataclasses.Courses
 import com.example.projekt_zespolowy.components.Confirmed
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
@@ -48,6 +49,8 @@ import com.example.projekt_zespolowy.components.infoContainers
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
+// Tutaj do CourseDetails chciałbym przekazać Course_name pod nazwą Inner_Course_name
 fun CourseDetails(onClick: (String) -> Unit, context: Context) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -78,6 +81,22 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
                 TopBar(contentPadding, scope, drawerState, currentLocation, infoContainers, onClick)
 
                 // Zawartość ekranu pod paskiem
+
+                // Tutaj na podstawie dbCourses.records[]
+                /*
+
+                for(item: Courses in dbCourses.records)
+                {
+                    for(nazwa : String in item.Course_name
+                    if(Inner_Course_name == nazwa)
+                    {
+                    //wyświetlanie danych tutaj, lub przypisanie ich od nowej tablicy typu Courses
+                    }
+                }
+
+
+
+                 */
 
                 ElevatedCard(
                     modifier = Modifier
