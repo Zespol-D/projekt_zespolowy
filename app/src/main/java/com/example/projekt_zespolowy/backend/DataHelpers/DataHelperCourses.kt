@@ -36,9 +36,10 @@ class DatabaseHelperCourses {
                         try {
                             records?.add(
                                 Courses(
-                                    kursyCursor!!.getInt("ID"),
+
                                     kursyCursor!!.getString("Course_name"),
-                                    kursyCursor!!.getInt("Course_organizer_id"),
+                                    kursyCursor!!.getString("FirstName"),
+                                    kursyCursor!!.getString("LastName"),
                                     kursyCursor!!.getString("Start_date"),
                                     kursyCursor!!.getString("End_date"),
                                     kursyCursor!!.getFloat("Ticket_price")
@@ -61,7 +62,7 @@ class DatabaseHelperCourses {
         }
     }
     fun getCustomers(){
-        query ="SELECT * FROM Courses"
+        query ="SELECT  [Course_name],[FirstName],[LastName],[Start_date],[End_date],[Ticket_price]FROM [NurturGuide].[dbo].[Od najnowszych]\n"
         SyncData().execute("")
     }
 }

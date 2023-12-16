@@ -24,6 +24,7 @@ import com.example.projekt_zespolowy.Location
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
 import com.example.projekt_zespolowy.components.infoContainers
+import com.example.projekt_zespolowy.dbCouses
 
 @Composable
 fun showToast(context: Context, message: String) {
@@ -86,7 +87,7 @@ fun MainScreen1(onClick: (String) -> Unit) {
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        items(100) { index ->
+                        items(dbCouses.records.size) { index ->
                             val context = LocalContext.current // Pobieramy kontekst
 
                             Box(
@@ -122,15 +123,15 @@ fun MainScreen1(onClick: (String) -> Unit) {
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
                                     Text(
-                                        text = "Kurs numer: $index",
+                                        text = "Kurs nazwa: ${dbCouses.records[index].Course_name}",
                                         fontSize = 14.sp,
                                         textAlign = TextAlign.Center,
                                     )
-                                    Text(text = "Nazwa_kursu")
-                                    Text(text = "Organizator kursu")
-                                    Text(text = "Data_rozpoczęcia")
-                                    Text(text = "Data_zakończenia")
-                                    Text(text = "Cena_za_udział")
+                                    Text(text = dbCouses.records[index].Start_date)
+                                    Text(text = dbCouses.records[index].End_date)
+                                    Text(text = dbCouses.records[index].Organizer_name)
+                                    Text(text = dbCouses.records[index].Organizer_LastName)
+
                                     
                                 }
                             }
