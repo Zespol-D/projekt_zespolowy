@@ -46,9 +46,12 @@ import com.example.projekt_zespolowy.components.Confirmed
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
 import com.example.projekt_zespolowy.components.infoContainers
+import com.example.projekt_zespolowy.dbCouses
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
+
 
 // Tutaj do CourseDetails chciałbym przekazać Course_name pod nazwą Inner_Course_name
 fun CourseDetails(onClick: (String) -> Unit, context: Context) {
@@ -82,21 +85,6 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
 
                 // Zawartość ekranu pod paskiem
 
-                // Tutaj na podstawie dbCourses.records[]
-                /*
-
-                for(item: Courses in dbCourses.records)
-                {
-                    for(nazwa : String in item.Course_name
-                    if(Inner_Course_name == nazwa)
-                    {
-                    //wyświetlanie danych tutaj, lub przypisanie ich od nowej tablicy typu Courses
-                    }
-                }
-
-
-
-                 */
 
                 ElevatedCard(
                     modifier = Modifier
@@ -140,99 +128,109 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
 
                     } else {
                         // Zawartość ekranu pod paskiem
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(550.dp)
-                                .padding(10.dp)
-                                .background(
-                                    MaterialTheme.colorScheme.surface,
-                                    shape = MaterialTheme.shapes.medium
-                                )
-                                .border(
-                                    1.dp,
-                                    MaterialTheme.colorScheme.onSurface,
-                                    shape = MaterialTheme.shapes.medium
-                                )
-                        ) {
-                            Column(
+
+
+                        for(kursy in dbCouses.records)
+                        {
+                            if(kursy.Course_name == "Nauka jazdy")
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(550.dp)
+                                        .padding(10.dp)
+                                        .background(
+                                            MaterialTheme.colorScheme.surface,
+                                            shape = MaterialTheme.shapes.medium
+                                        )
+                                        .border(
+                                            1.dp,
+                                            MaterialTheme.colorScheme.onSurface,
+                                            shape = MaterialTheme.shapes.medium
+                                        )
+                                ) {
+                                    Column(
+                                        modifier = Modifier
+                                            .padding(16.dp)
+                                            .fillMaxWidth(),
+                                        verticalArrangement = Arrangement.Center,
+                                        horizontalAlignment = Alignment.Start
+                                    ) {
+                                        Text(text = kursy.Course_name,
+                                            modifier = Modifier
+                                                .padding(start = 16.dp, bottom = 10.dp),
+                                            textAlign = TextAlign.Start,
+                                            fontSize = 15.sp
+                                        )
+                                        Text(text = "Data rozpoczęcia: ${kursy.Start_date}",
+                                            modifier = Modifier
+                                                .padding(start = 16.dp, bottom = 10.dp),
+                                            textAlign = TextAlign.Start,
+                                            fontSize = 15.sp
+                                        )
+                                        Text(text = "Data zakończenia: ${kursy.End_date} ",
+                                            modifier = Modifier
+                                                .padding(start = 16.dp, bottom = 10.dp),
+                                            textAlign = TextAlign.Start,
+                                            fontSize = 15.sp
+                                        )
+
+                                        Text(text = "Cena zaudział: ${kursy.Ticket_price}",
+                                            modifier = Modifier
+                                                .padding(start = 16.dp, bottom = 10.dp),
+                                            textAlign = TextAlign.Start,
+                                            fontSize = 15.sp
+                                        )
+                                    }
+                                }
+                            }
+                            Row(
                                 modifier = Modifier
-                                    .padding(16.dp)
-                                    .fillMaxWidth(),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.Start
+                                    .fillMaxWidth()
+                                    .height(100.dp),
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(text = "Organizator:",
-                                    modifier = Modifier
-                                        .padding(start = 16.dp, bottom = 10.dp),
-                                    textAlign = TextAlign.Start,
-                                    fontSize = 15.sp
-                                )
-                                Text(text = "Data rozpoczęcia:",
-                                    modifier = Modifier
-                                        .padding(start = 16.dp, bottom = 10.dp),
-                                    textAlign = TextAlign.Start,
-                                    fontSize = 15.sp
-                                )
-                                Text(text = "Data zakończenia:",
-                                    modifier = Modifier
-                                        .padding(start = 16.dp, bottom = 10.dp),
-                                    textAlign = TextAlign.Start,
-                                    fontSize = 15.sp
-                                )
 
-                                Text(text = "Cena zaudział:",
+                                OutlinedButton(
                                     modifier = Modifier
-                                        .padding(start = 16.dp, bottom = 10.dp),
-                                    textAlign = TextAlign.Start,
-                                    fontSize = 15.sp
+                                        .width(width = 120.dp)
+                                        .height(height = 50.dp),
+                                    onClick = {
+                                        onClick("glownyEkran")
+                                    }
+                                ) {
+                                    Text(text = "Zamknij")
+                                }
+                                Spacer(modifier = Modifier
+                                    .fillMaxHeight()
+                                    .width(80.dp)
                                 )
-                            }
-                        }
-                    }
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        OutlinedButton(
-                            modifier = Modifier
-                            .width(width = 120.dp)
-                            .height(height = 50.dp),
-                            onClick = {
-                                onClick("glownyEkran")
-                            }
-                        ) {
-                            Text(text = "Zamknij")
-                        }
-                        Spacer(modifier = Modifier
-                            .fillMaxHeight()
-                            .width(80.dp)
-                        )
-                        OutlinedButton( modifier = Modifier
-                            .width(width = 120.dp)
-                            .height(height = 50.dp),
-                            onClick = {
-                                if (!isClicked) {
-                                    isConfirmed = true
-                                }
-                                else {
-                                    Toast
-                                        .makeText(
-                                            context,
-                                            "Już zapisano na kurs",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                }
-                                isClicked = true
-                            }
-                        ) {
-                            Text(text = "Zapisz się")
+                                OutlinedButton( modifier = Modifier
+                                    .width(width = 120.dp)
+                                    .height(height = 50.dp),
+                                    onClick = {
+                                        if (!isClicked) {
+                                            isConfirmed = true
+                                        }
+                                        else {
+                                            Toast
+                                                .makeText(
+                                                    context,
+                                                    "Już zapisano na kurs",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                        }
+                                        isClicked = true
+                                    }
+                                ) {
+                                    Text(text = "Zapisz się")
 
+                                }
+                            }
+                            }
                         }
-                    }
+
                 }
             }
         }

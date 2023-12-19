@@ -11,9 +11,12 @@ import com.example.projekt_zespolowy.backend.dataclasses.Courses
 class DatabaseHelperCourses {
     private var isConnected = false
     private lateinit var query:String
+    private lateinit var query2:String
     private var recordCount:Int=0
+    private var record2Count:Int=0
     private var functionType:Int = 0
     lateinit var records : ArrayList<Courses>
+    lateinit var records2 : ArrayList<Courses>
     lateinit var connection: Connection
 
     inner class SyncData : AsyncTask<String,String,String>(){
@@ -22,7 +25,13 @@ class DatabaseHelperCourses {
             records = ArrayList<Courses>()
             records.clear()
             recordCount = 0;
+
+            //second querry
+            records2 = ArrayList<Courses>()
+            records2.clear()
+            record2Count = 0;
         }
+
         override fun doInBackground(vararg params: String?): String {
             var myConn = connection?.conn()
             if(myConn == null){
@@ -60,8 +69,12 @@ class DatabaseHelperCourses {
             return message
         }
     }
+
+
     fun getCourses(){
-        query ="SELECT  [Course_name],[FirstName],[LastName],[Start_date],[End_date],[Ticket_price]FROM [NurturGuide].[dbo].[Od najnowszych]\n"
+        query ="SELECT  [Course_name],[FirstName],[LastName],[Start_date],[End_date],[Ticket_price] FROM [NurturGuide].[dbo].[Od najnowszych]\n"
         SyncData().execute("")
     }
+
+
 }

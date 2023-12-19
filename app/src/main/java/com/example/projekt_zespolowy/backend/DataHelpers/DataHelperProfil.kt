@@ -63,4 +63,7 @@ class DatabaseHelperProfil {
         query ="SELECT [FirstName],[LastName],[Mail],[Tel],[Gender],[Nationality],[Area_code] FROM [NurturGuide].[dbo].[Profil]\n"
         SyncData().execute("")
     }
+
+
+
 }
