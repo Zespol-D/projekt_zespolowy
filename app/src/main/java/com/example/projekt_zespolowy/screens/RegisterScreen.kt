@@ -2,6 +2,7 @@ package com.example.projekt_zespolowy.screens
 
 import android.content.Context
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,10 +15,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -29,13 +36,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.toSize
 import androidx.navigation.compose.rememberNavController
 enum class TextFieldStateRegistration {
     EMPTY,
@@ -52,6 +63,7 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
     var password1 by remember { mutableStateOf("") }
     var password2 by remember { mutableStateOf("") }
 
+
     // wypełnienia pól (labels)
     var nameFieldFilling by remember { mutableStateOf("Imię")}
     var surnameFieldFilling by remember { mutableStateOf("Nazwisko")}
@@ -61,6 +73,23 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
     var password1Filling by remember { mutableStateOf("Hasło") }
     var password2Filling by remember { mutableStateOf("Powtórz hasło")}
     var nameOfOrganizationFilling by remember { mutableStateOf("Nazwa organizacji")}
+
+    // Expanded jest stanem otwartego/zamkniętego Dropdown Menu
+    var mExpanded by remember { mutableStateOf(false) }
+
+    // Lista płci
+    val płcie = listOf("Kobieta", "Mężczyzna", "Helikopter bojowy")
+
+    // Tutaj przechowujemy wybrany element
+    var wybranyElement by remember { mutableStateOf("") }
+
+    var wybranyElementSize by remember { mutableStateOf(Size.Zero)}
+
+    // podmiana ikon zależnie od sytuacji
+    val icon = if (mExpanded)
+        Icons.Filled.KeyboardArrowUp
+    else
+        Icons.Filled.KeyboardArrowDown
 
     // stany pól
     var passwordVisible : Boolean by remember { mutableStateOf(false)}
@@ -233,9 +262,10 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
                     )
                 }
                 item {
-                    OutlinedTextField(modifier = Modifier
-                        .width(250.dp)
-                        .height(75.dp),
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .width(250.dp)
+                            .height(75.dp),
                         value = email,
                         onValueChange = {
                             email = it
@@ -262,6 +292,55 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
                             .fillMaxWidth()
                             .height(8.dp)
                     )
+                }
+                item {
+                    Column(
+                        modifier = Modifier
+                            .width(250.dp)
+                            .height(75.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        OutlinedTextField(
+                            value = wybranyElement,
+                            onValueChange = { wybranyElement = it },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .onGloballyPositioned { coordinates ->
+                                    // Ta wartość jest używana do przypisania
+                                    // szerokości Dropdown Menu do szerokości kolumny
+                                    wybranyElementSize = coordinates.size.toSize()
+                                },
+                            label = {Text("Płeć")},
+                            readOnly = true,
+                            trailingIcon = {
+                                Icon(icon,"contentDescription",
+                                    Modifier.clickable { mExpanded = !mExpanded })
+                            }
+                        )
+
+                        // Tutaj jest tworzone te Dropdown Menu
+                        DropdownMenu(
+                            expanded = mExpanded,
+                            onDismissRequest = { mExpanded = false },
+                            modifier = Modifier
+                                .width(with(LocalDensity.current){wybranyElementSize.width.toDp()})
+                        ) {
+                            płcie.forEach { label ->
+                                DropdownMenuItem(onClick = {
+                                    wybranyElement = label
+                                    mExpanded = false
+                                }) {
+                                    Text(text = label)
+                                }
+                            }
+                        }
+                    }
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(8.dp)
+                        )
                 }
                 item {
                     OutlinedTextField(modifier = Modifier
@@ -294,6 +373,7 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
                             .height(8.dp)
                     )
                 }
+                // kod pocztowy
                 item {
                     OutlinedTextField(modifier = Modifier
                         .width(250.dp)
