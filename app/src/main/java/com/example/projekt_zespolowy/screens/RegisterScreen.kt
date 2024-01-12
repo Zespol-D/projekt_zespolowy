@@ -60,8 +60,15 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
     var name by remember { mutableStateOf("") }
     var surname by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("")}
+    var nationality by remember { mutableStateOf("")}
+    var postCode by remember { mutableStateOf("")}
     var password1 by remember { mutableStateOf("") }
     var password2 by remember { mutableStateOf("") }
+    var nameOfOrganization by remember { mutableStateOf("") }
+    // Tutaj przechowujemy wybrany element z wybieratora płci
+    var gender by remember { mutableStateOf("") }
+    var wybranyElementSize by remember { mutableStateOf(Size.Zero)}
 
 
     // wypełnienia pól (labels)
@@ -73,17 +80,16 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
     var password1Filling by remember { mutableStateOf("Hasło") }
     var password2Filling by remember { mutableStateOf("Powtórz hasło")}
     var nameOfOrganizationFilling by remember { mutableStateOf("Nazwa organizacji")}
+    var postCodeFilling by remember { mutableStateOf("Kod pocztowy")}
+
 
     // Expanded jest stanem otwartego/zamkniętego Dropdown Menu
     var mExpanded by remember { mutableStateOf(false) }
 
     // Lista płci
-    val płcie = listOf("Kobieta", "Mężczyzna", "Helikopter bojowy")
+    val płcie = listOf("Kobieta", "Mężczyzna", "Inna")
 
-    // Tutaj przechowujemy wybrany element
-    var wybranyElement by remember { mutableStateOf("") }
 
-    var wybranyElementSize by remember { mutableStateOf(Size.Zero)}
 
     // podmiana ikon zależnie od sytuacji
     val icon = if (mExpanded)
@@ -94,7 +100,6 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
     // stany pól
     var passwordVisible : Boolean by remember { mutableStateOf(false)}
     var passwordFieldState by remember { mutableStateOf(TextFieldStateRegistration.NOTHING) }
-    var nameOfOrganization by remember { mutableStateOf("") }
     var organizationState by remember { mutableStateOf( false)}
     var isChecked by remember { mutableStateOf(false) }
     var isCheckedAgree by remember { mutableStateOf(false)}
@@ -266,9 +271,9 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
                         modifier = Modifier
                             .width(250.dp)
                             .height(75.dp),
-                        value = email,
+                        value = phone,
                         onValueChange = {
-                            email = it
+                            phone = it
                             if (it.isEmpty()) {
                                 phoneFieldFilling = "Telefon"
                             }
@@ -302,8 +307,8 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         OutlinedTextField(
-                            value = wybranyElement,
-                            onValueChange = { wybranyElement = it },
+                            value = gender,
+                            onValueChange = { gender = it },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .onGloballyPositioned { coordinates ->
@@ -328,7 +333,7 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
                         ) {
                             płcie.forEach { label ->
                                 DropdownMenuItem(onClick = {
-                                    wybranyElement = label
+                                    gender = label
                                     mExpanded = false
                                 }) {
                                     Text(text = label)
@@ -346,15 +351,46 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
                     OutlinedTextField(modifier = Modifier
                         .width(250.dp)
                         .height(75.dp),
-                        value = email,
+                        value = nationality,
                         onValueChange = {
-                            email = it
+                            nationality = it
                             if (it.isEmpty()) {
                                 nationalityFieldFilling = "Narodowość"
                             }
                         },
                         label = {
                             Text(text = "Narodowość")
+                        },
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Done
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onDone = {
+                                hideKeyboard()
+                            }
+                        )
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(8.dp)
+                    )
+                }
+                item {
+                    OutlinedTextField(modifier = Modifier
+                        .width(250.dp)
+                        .height(75.dp),
+                        value = postCode,
+                        onValueChange = {
+                            postCode= it
+                            if (it.isEmpty()) {
+                                postCodeFilling = "Kod pocztowy"
+                            }
+                        },
+                        label = {
+                            Text(text = "Kod pocztowy")
                         },
                         singleLine = true,
                         keyboardOptions = KeyboardOptions(
