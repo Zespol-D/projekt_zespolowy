@@ -3,6 +3,7 @@ package com.example.projekt_zespolowy.screens
 import android.content.Context
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
@@ -52,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.R
+import com.example.projekt_zespolowy.dataViewModel
 import com.example.projekt_zespolowy.dbLoggedProfile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -161,11 +163,14 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
 
     fun chechInBase(Login : String, Password : String) : String{
         dbLoggedProfile.getProfil("SELECT Mail FROM Users WHERE Login ='$Login' AND Password = '$Password'")
+        Log.i("checkInBase", "querry")
         var logged = dbLoggedProfile.getMail()
-        if(logged.length <= 0){
+        if(logged == "false"){
             // nie zalogowano
+            Log.i("checkInBase", "nie zalogowano")
         }
         // zalogowano
+        Log.i("checkInBase", "zalogowano: $logged")
         return  logged
     }
 
@@ -311,8 +316,10 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
                         CoroutineScope(MainScope().coroutineContext).launch {
                             //validate()
                             //hideKeyboard()
-                            chechInBase(login, password)
+                            var user = chechInBase(login, password)
+                            dataViewModel.update_profil(user)
                             delay(200)
+                            onClick("glownyEkran")
                             if(loginFieldState == TextFieldState.VALID && passwordFieldState == TextFieldState.VALID){
                                 onClick("glownyEkran")
                             }
