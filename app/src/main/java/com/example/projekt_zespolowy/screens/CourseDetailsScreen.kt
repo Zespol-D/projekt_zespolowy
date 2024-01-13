@@ -46,6 +46,7 @@ import com.example.projekt_zespolowy.components.Confirmed
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
 import com.example.projekt_zespolowy.components.infoContainers
+import com.example.projekt_zespolowy.dataViewModel
 import com.example.projekt_zespolowy.dbCouses
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -132,7 +133,7 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
 
                         for(kursy in dbCouses.records)
                         {
-                            if(kursy.Course_name == "Nauka jazdy")
+                            if(kursy.Course_name == dataViewModel.specyfic_course)
                             {
                                 Box(
                                     modifier = Modifier

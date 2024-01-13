@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.Location
+import com.example.projekt_zespolowy.dataViewModel
 
 
 // to jest zawartość wysuwanego elementu od boku
@@ -119,6 +120,7 @@ fun DrawerContent(currentLocation: Location, onClick: (String) -> Unit) {
                     .height(47.dp),
                 onClick = {
                     onClick("profil")
+                    //dataViewModel.specyfic_profil
                 }) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),

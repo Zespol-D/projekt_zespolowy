@@ -11,7 +11,7 @@ class Connection {
 
 
     //adress hosta
-    private val id = "192.168.0.106:1433"
+    private val id = "192.168.0.105:1433"
     //nazwa bazy danych
     private val db = "NurturGuide"
 

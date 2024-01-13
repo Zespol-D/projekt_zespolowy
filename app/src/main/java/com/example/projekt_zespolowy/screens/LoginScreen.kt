@@ -52,6 +52,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.R
+import com.example.projekt_zespolowy.dbLoggedProfile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -67,6 +68,7 @@ enum class TextFieldState {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreen(context: Context, onClick: (String) -> Unit){
+
     var login by remember { mutableStateOf("")}
     var password by remember { mutableStateOf("")}
     var passwordVisible : Boolean by remember { mutableStateOf(false)}
@@ -154,6 +156,17 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
                 counter ++
             }
         }
+
+    }
+
+    fun chechInBase(Login : String, Password : String) : String{
+        dbLoggedProfile.getProfil("SELECT Mail FROM Users WHERE Login ='$Login' AND Password = '$Password'")
+        var logged = dbLoggedProfile.getMail()
+        if(logged.length <= 0){
+            // nie zalogowano
+        }
+        // zalogowano
+        return  logged
     }
 
 
@@ -216,6 +229,7 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
                         onDone = {
                             validate()
                             hideKeyboard()
+
                             if(loginFieldState == TextFieldState.VALID && passwordFieldState == TextFieldState.VALID){
                                 onClick("glownyEkran")
                             }
@@ -295,8 +309,9 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
                     .padding(3.dp),
                     onClick = {
                         CoroutineScope(MainScope().coroutineContext).launch {
-                            validate()
-                            hideKeyboard()
+                            //validate()
+                            //hideKeyboard()
+                            chechInBase(login, password)
                             delay(200)
                             if(loginFieldState == TextFieldState.VALID && passwordFieldState == TextFieldState.VALID){
                                 onClick("glownyEkran")

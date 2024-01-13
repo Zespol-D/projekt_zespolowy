@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.projekt_zespolowy.backend.DataHelpers.DataHelperLogin
 import com.example.projekt_zespolowy.backend.DataHelpers.DatabaseHelperCourses
 import com.example.projekt_zespolowy.backend.DataHelpers.DatabaseHelperProfil
 import com.example.projekt_zespolowy.screens.AddCourse
@@ -24,16 +25,22 @@ import com.example.projekt_zespolowy.screens.MainScreen1
 import com.example.projekt_zespolowy.screens.RegisterScreen
 import com.example.projekt_zespolowy.screens.YourProfile
 import com.example.projekt_zespolowy.ui.theme.Projekt_zespolowyTheme
+import com.example.projekt_zespolowy.ui.theme.dataViewModel
 
 //Deklaracje konektorów
 val dbCouses: DatabaseHelperCourses = DatabaseHelperCourses()
 val dbProfil: DatabaseHelperProfil = DatabaseHelperProfil()
+val dataViewModel: dataViewModel = dataViewModel()
+val dbLoggedProfile: DataHelperLogin = DataHelperLogin()
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         //Wywołania połączeń
         dbCouses.connection = Connection()
         dbProfil.connection = Connection()
+        dbLoggedProfile.connection = Connection()
+
+
 
         //Przypisanie danych do konektora
         dbCouses.getCourses()

@@ -24,6 +24,7 @@ import com.example.projekt_zespolowy.Location
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
 import com.example.projekt_zespolowy.components.infoContainers
+import com.example.projekt_zespolowy.dataViewModel
 import com.example.projekt_zespolowy.dbCouses
 
 @Composable
@@ -98,6 +99,7 @@ fun MainScreen1(onClick: (String) -> Unit) {
 
                                         //Co robi tan onclikc i czy może przekazywać więcej wartości niż ta jedna?
                                         onClick("detaleKursu")
+                                        dataViewModel.updatePerson(dbCouses.records[index].Course_name)
                                         Toast
                                             .makeText(
                                                 context,
