@@ -15,5 +15,15 @@ class dataViewModel : ViewModel() {
         specyfic_profil = name
     }
 
+    fun getPrifile() :String{
+        return specyfic_profil
+    }
+
+    fun clearData(){
+        specyfic_profil=""
+        specyfic_course=""
+
+    }
+
 
 }

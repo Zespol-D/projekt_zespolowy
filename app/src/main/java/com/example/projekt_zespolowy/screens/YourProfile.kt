@@ -1,5 +1,6 @@
 package com.example.projekt_zespolowy.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -43,13 +44,20 @@ import com.example.projekt_zespolowy.Location
 import com.example.projekt_zespolowy.R
 import com.example.projekt_zespolowy.components.TopBar
 import com.example.projekt_zespolowy.components.infoContainers
-
+import com.example.projekt_zespolowy.dataViewModel
+import com.example.projekt_zespolowy.dbProfil
+fun getProfilQuery(mail : String) : String{
+    var newQuery = "SELECT dbo.Profil.* FROM dbo.Profil WHERE Mail = '$mail'"
+    Log.i("newProfileQuery", newQuery)
+    return newQuery
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun YourProfile(onClick: (String) -> Unit) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val currentLocation by remember { mutableStateOf(Location.PROFILE) } // tutaj zmiana stanu ikony na wypełnioną
+    dbProfil.getProfil(getProfilQuery(dataViewModel.getPrifile()))
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -126,14 +134,14 @@ fun YourProfile(onClick: (String) -> Unit) {
                                 .fillMaxWidth()
                             )
                             Row {
-                                Text(text = "Karol",
+                                Text(text = dbProfil.records.first().FirstName,
                                     fontSize = 30.sp,
                                     style = TextStyle(fontWeight = FontWeight.ExtraBold),
                                     textAlign = TextAlign.Center)
                                 Spacer(modifier = Modifier
                                     .width(6.dp)
                                 )
-                                Text(text = "Wojtyła",
+                                Text(text = dbProfil.records.first().LastName,
                                     fontSize = 30.sp,
                                     style = TextStyle(fontWeight = FontWeight.ExtraBold),
                                     textAlign = TextAlign.Center)

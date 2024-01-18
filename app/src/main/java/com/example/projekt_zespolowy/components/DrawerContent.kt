@@ -178,8 +178,9 @@ fun DrawerContent(currentLocation: Location, onClick: (String) -> Unit) {
                     showDialog = showLogoutDialog,
                     onDismissRequest = { setShowLogoutDialog(false) },
                     onConfirmation = {
-                        // Tutaj jest logika obsługi potwierdzenia
+                        dataViewModel.clearData()
                         onClick("wyloguj")
+
                     }
                 )
                 Row(

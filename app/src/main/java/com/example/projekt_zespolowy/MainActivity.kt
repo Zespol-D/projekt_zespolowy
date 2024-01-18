@@ -2,6 +2,7 @@ package com.example.projekt_zespolowy
 
 import Connection
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,6 +35,7 @@ val dataViewModel: dataViewModel = dataViewModel()
 val dbLoggedProfile: DataHelperLogin = DataHelperLogin()
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //Wywołania połączeń
         dbCouses.connection = Connection()
@@ -44,7 +46,9 @@ class MainActivity : ComponentActivity() {
 
         //Przypisanie danych do konektora
         dbCouses.getCourses()
-        dbProfil.getProfil()
+        Log.i("MAIL", dataViewModel.specyfic_profil)
+
+
 
         super.onCreate(savedInstanceState)
         setContent {
@@ -107,6 +111,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+
     }
 }
 

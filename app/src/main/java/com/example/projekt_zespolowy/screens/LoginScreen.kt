@@ -319,8 +319,9 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
                             var user = chechInBase(login, password)
                             dataViewModel.update_profil(user)
                             delay(200)
+                            dataViewModel.update_profil(user)
                             onClick("glownyEkran")
-                            if(loginFieldState == TextFieldState.VALID && passwordFieldState == TextFieldState.VALID){
+                            if(loginFieldState == TextFieldState.VALID && passwordFieldState == TextFieldState.VALID && dataViewModel.specyfic_profil != "false"){
                                 onClick("glownyEkran")
                             }
                         }
