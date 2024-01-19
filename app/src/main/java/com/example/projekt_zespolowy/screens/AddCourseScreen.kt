@@ -189,7 +189,7 @@ fun AddCourse(onClick: (String) -> Unit) {
                                 Text(text = "Cena za udział")
                             },
                             singleLine = true,
-                            keyboardOptions = KeyboardOptions(
+                            keyboardOptions = KeyboardOptions(    // konfiguracja pola tekstowego dla organizatora
                                 keyboardType = KeyboardType.Number,
                                 imeAction = ImeAction.Done
                             ),
@@ -297,26 +297,6 @@ fun AddCourse(onClick: (String) -> Unit) {
                                 }
                             }
                         )
-                            /*
-                            ChooseDate(
-                                showDialog = showDateDialog,
-                                onDismissRequest = { setShowDateDialog(false) },
-                                sharedViewModel = sharedViewModel,
-                            )
-
-                            selectedDate?.let { (year, month, dayOfMonth) ->
-                                if (isStartDateClicked) {
-                                    startDate = "$dayOfMonth-$month-$year"
-                                    //startDateFilling = startDate
-                                    isStartDateClicked = false
-
-                                }
-                                else if(isEndDateClicked) {
-                                    endDate = "$dayOfMonth-$month-$year"
-                                    //endDateFilling = endDate
-                                    isEndDateClicked = false
-                            }
-                        } */
                     }
                 }
             }

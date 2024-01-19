@@ -114,7 +114,6 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
         val emailRegex = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
         return email.matches(emailRegex.toRegex())
     }
-
     fun validate() {
         when {
             (password1 != password2) -> {
@@ -580,7 +579,8 @@ fun RegisterScreen(context: Context, onClick: (String) -> Unit) {
             Button(modifier = Modifier
                 .width(width = 180.dp)
                 .height(height = 60.dp)
-                .padding(3.dp),onClick = {
+                .padding(3.dp),
+                onClick = {
             }
             ) {
                 Text(text = "Załóż konto")

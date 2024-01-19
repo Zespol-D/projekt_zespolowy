@@ -39,9 +39,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
-import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.Location
 import com.example.projekt_zespolowy.R
+import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
 import com.example.projekt_zespolowy.components.infoContainers
 import com.example.projekt_zespolowy.dataViewModel
@@ -115,7 +115,7 @@ fun YourProfile(onClick: (String) -> Unit) {
                                     .padding(8.dp),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.papaj), // Podmień na własną ścieżkę do zdjęcia
+                                    painter = painterResource(id = R.drawable.profileicon), // Podmień na własną ścieżkę do zdjęcia
                                     contentDescription = "Profile Picture",
                                     modifier = Modifier.fillMaxSize(),
                                     contentScale = ContentScale.Crop
