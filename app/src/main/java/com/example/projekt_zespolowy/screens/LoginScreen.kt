@@ -161,11 +161,11 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
 
     }
 
-    fun chechInBase(Login : String, Password : String) : String{
-        dbLoggedProfile.getProfil("SELECT Mail FROM Users WHERE Login ='$Login' AND Password = '$Password'")
+    fun chechInBase(Login : String, Password : String) : Int{
+        dbLoggedProfile.getProfil("SELECT ID FROM Users WHERE Login ='$Login' AND Password = '$Password'")
         Log.i("checkInBase", "querry")
-        var logged = dbLoggedProfile.getMail()
-        if(logged == "false"){
+        var logged = dbLoggedProfile.getIDUser()
+        if(logged == 0){
             // nie zalogowano
             Log.i("checkInBase", "nie zalogowano")
         }
@@ -317,9 +317,10 @@ fun LoginScreen(context: Context, onClick: (String) -> Unit){
                             //validate()
                             //hideKeyboard()
                             var user = chechInBase(login, password)
-                            dataViewModel.update_profil(user)
+                            dataViewModel.UpdateSpecyficUserId(user)
                             delay(200)
-                            dataViewModel.update_profil(user)
+                            dataViewModel.UpdateSpecyficUserId(user)
+                            dataViewModel.specyfic_user_id
                             onClick("glownyEkran")
                             if(loginFieldState == TextFieldState.VALID && passwordFieldState == TextFieldState.VALID && dataViewModel.specyfic_profil != "false"){
                                 onClick("glownyEkran")

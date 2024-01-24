@@ -10,6 +10,12 @@ class dataViewModel : ViewModel() {
             specyfic_course = name
         }
 
+    var specyfic_user_id : Int = 0
+
+    fun UpdateSpecyficUserId(id : Int){
+        specyfic_user_id = id
+    }
+
     var specyfic_profil : String =""
     fun update_profil(name: String){
         specyfic_profil = name

@@ -1,26 +1,30 @@
 package com.example.projekt_zespolowy.backend.DataHelpers
 
-
 import Connection
 import android.os.AsyncTask
-import com.example.projekt_zespolowy.backend.dataclasses.Profil
+import com.example.projekt_zespolowy.backend.dataclasses.Courses
+import com.example.projekt_zespolowy.backend.dataclasses.UserCourse
+
+class DataHelperUserCourse {
 
 
-class DatabaseHelperProfil {
+
     private var isConnected = false
     private lateinit var query:String
     private var recordCount:Int=0
     private var functionType:Int = 0
-    lateinit var records : ArrayList<Profil>
+    lateinit var records : ArrayList<UserCourse>
     lateinit var connection: Connection
 
     inner class SyncData : AsyncTask<String,String,String>(){
         private var message = "No Connection or Windows FireWall"
         override fun onPreExecute() {
-            records = ArrayList<Profil>()
+            records = ArrayList<UserCourse>()
             records.clear()
             recordCount = 0;
+
         }
+
         override fun doInBackground(vararg params: String?): String {
             var myConn = connection?.conn()
             if(myConn == null){
@@ -33,17 +37,9 @@ class DatabaseHelperProfil {
                     while (cursor!!.next()) {
                         try {
                             records?.add(
-                                Profil(
-
-                                    cursor!!.getString("FirstName"),
-                                    cursor!!.getString("LastName"),
-                                    cursor!!.getString("Mail"),
-                                    cursor!!.getInt("Tel"),
-                                    cursor!!.getString("Gender"),
-                                    cursor!!.getString("Nationality"),
-                                    cursor!!.getInt("Area_code"),
-                                    cursor!!.getInt("ID")
-                                )
+                                UserCourse(
+                                    cursor!!.getInt("User_ID"),
+                                                               )
                             )
                             recordCount++
                         }catch (ex:Exception){
@@ -61,11 +57,12 @@ class DatabaseHelperProfil {
             return message
         }
     }
-    fun getProfil(newQuery: String){
-        query = newQuery
+
+
+    fun getCourses(){
+        query ="SELECT COUNT(User_ID) FROM Course_joining_users WHERE Course_ID = 3"
         SyncData().execute("")
     }
-
 
 
 }
