@@ -41,6 +41,7 @@ class addCourse {
                         try {
                             records?.add(
                                 Courses(
+                                    cursor!!.getInt("ID"),
                                     cursor!!.getString("Course_name"),
                                     cursor!!.getString("FirstName"),
                                     cursor!!.getString("LastName"),

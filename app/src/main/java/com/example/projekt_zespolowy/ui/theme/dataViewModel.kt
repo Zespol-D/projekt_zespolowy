@@ -1,6 +1,7 @@
 package com.example.projekt_zespolowy.ui.theme
 
 import androidx.lifecycle.ViewModel
+import com.example.projekt_zespolowy.backend.dataclasses.Courses
 
 class dataViewModel : ViewModel() {
 
@@ -31,5 +32,18 @@ class dataViewModel : ViewModel() {
 
     }
 
+
+    fun GetCousesForUser(List : List<Courses>, UserID: Int): MutableList<Courses>{
+        var MutableList = mutableListOf<Courses>()
+        for( item in List)
+        {
+            if(item.ID == UserID)
+                MutableList.add(item)
+        }
+
+        return MutableList
+
+
+    }
 
 }

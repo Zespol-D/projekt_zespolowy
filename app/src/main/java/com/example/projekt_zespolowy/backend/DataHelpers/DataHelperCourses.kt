@@ -45,6 +45,7 @@ class DatabaseHelperCourses {
                         try {
                             records?.add(
                                 Courses(
+                                    cursor!!.getInt("ID"),
                                     cursor!!.getString("Course_name"),
                                     cursor!!.getString("FirstName"),
                                     cursor!!.getString("LastName"),
@@ -72,7 +73,7 @@ class DatabaseHelperCourses {
 
 
     fun getCourses(){
-        query ="SELECT  [Course_name],[FirstName],[LastName],[Start_date],[End_date],[Ticket_price] FROM [NurturGuide].[dbo].[Od najnowszych]\n"
+        query ="SELECT [ID],[Course_name],[FirstName],[LastName],[Start_date],[End_date],[Ticket_price]FROM [NurturGuide].[dbo].[Od najtańszego]\n"
         SyncData().execute("")
     }
 
