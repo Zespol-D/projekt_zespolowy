@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.Location
 import com.example.projekt_zespolowy.backend.dataclasses.Courses
-import com.example.projekt_zespolowy.backend.dataclasses.UserCourse
 import com.example.projekt_zespolowy.backend.dataclasses.Users
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
@@ -111,14 +110,34 @@ fun ParticipantsListScreen(onClick: (String) -> Unit) {
                                         fontSize = 14.sp,
                                         textAlign = TextAlign.Center,
                                     )
+                                    /*
                                     Text(
                                         //Tutaj chcę mieć drugie lazy coulumn z wyświtlaniem danych z
                                         //Lastly od size
                                         text = "${Lastly[0].FirstName}",
                                         fontSize = 14.sp,
                                         textAlign = TextAlign.Center,
-                                    )
+                                    )*/
 
+                                    LazyColumn {
+                                        items(Lastly.size) { index ->
+                                            Row(
+                                                modifier = Modifier.fillMaxWidth(),
+                                                horizontalArrangement = Arrangement.SpaceBetween
+                                            ) {
+                                                Text(
+                                                    text = "${Lastly[index].FirstName}",
+                                                    fontSize = 14.sp,
+                                                    textAlign = TextAlign.Center,
+                                                )
+                                                Text(
+                                                    text = "${Lastly[index].LastName}",
+                                                    fontSize = 14.sp,
+                                                    textAlign = TextAlign.Center,
+                                                )
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

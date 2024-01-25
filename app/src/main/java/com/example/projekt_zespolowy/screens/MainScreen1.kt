@@ -154,17 +154,7 @@ fun MainScreen1(onClick: (String) -> Unit) {
                                 }
                             }
                         }
-                        FloatingActionButton(
-                            modifier = Modifier
-                                .align(Alignment.BottomEnd)
-                                .padding(16.dp)
-                                .zIndex(1f), // Ustawienie wartości zIndex na 1, żeby ten chujowy przycisk był zawsze na wierzchu
-                            onClick = {
-                                onClick("listaUczestnikow")
-                            }
-                        ) {
-                            Text(text = "Moje Kursy")
-                        }
+
                     }
                 }
             }

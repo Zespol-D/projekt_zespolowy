@@ -19,6 +19,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -39,9 +40,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.Location
-import com.example.projekt_zespolowy.backend.dataclasses.Courses
 import com.example.projekt_zespolowy.components.Confirmed
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
@@ -176,12 +177,23 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
                                             fontSize = 15.sp
                                         )
 
-                                        Text(text = "Cena zaudział: ${kursy.Ticket_price}",
+                                        Text(text = "Cena za udział: ${kursy.Ticket_price}",
                                             modifier = Modifier
                                                 .padding(start = 16.dp, bottom = 10.dp),
                                             textAlign = TextAlign.Start,
                                             fontSize = 15.sp
                                         )
+                                    }
+                                    FloatingActionButton(
+                                        modifier = Modifier
+                                            .align(Alignment.BottomEnd)
+                                            .padding(16.dp)
+                                            .zIndex(1f), // Ustawienie wartości zIndex na 1, żeby ten chujowy przycisk był zawsze na wierzchu
+                                        onClick = {
+                                            onClick("listaUczestnikow")
+                                        }
+                                    ) {
+                                        Text(text = "Moje\nKursy", modifier = Modifier.padding(4.dp))
                                     }
                                 }
                             }
@@ -229,9 +241,8 @@ fun CourseDetails(onClick: (String) -> Unit, context: Context) {
 
                                 }
                             }
-                            }
                         }
-
+                    }
                 }
             }
         }
@@ -245,3 +256,6 @@ fun CourseDetailsPreview() {
     val context = LocalContext.current
     CourseDetails(onClick = { navController.navigate(route = it) }, context = context)
 }
+/*
+
+ */
