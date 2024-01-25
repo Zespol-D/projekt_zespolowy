@@ -2,12 +2,11 @@ package com.example.projekt_zespolowy.backend.DataHelpers
 
 import Connection
 import android.os.AsyncTask
-import com.example.projekt_zespolowy.backend.dataclasses.Profil
 
 class DataHelperLogin {
 
         private var isConnected = false
-        private var mail : String = ""
+        private var Id : Int = 0
         private lateinit var query:String
 
     lateinit var connection: Connection
@@ -29,7 +28,7 @@ class DataHelperLogin {
                     if(cursor != null) {
                         while (cursor!!.next()) {
                             try {
-                                mail = cursor!!.getString("Mail")
+                                Id = cursor!!.getInt("ID")
                             }catch(ex:Exception){
                                 ex.printStackTrace()
                             }
@@ -50,8 +49,10 @@ class DataHelperLogin {
             query = newQuerry
             SyncData().execute("")
         }
-        fun getMail() : String{
-            return mail
+
+
+        fun getIDUser() : Int{
+            return Id
         }
 
 

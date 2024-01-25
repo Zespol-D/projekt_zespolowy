@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.backend.DataHelpers.DataHelperLogin
+import com.example.projekt_zespolowy.backend.DataHelpers.DataHelperUserCourse
 import com.example.projekt_zespolowy.backend.DataHelpers.DatabaseHelperCourses
 import com.example.projekt_zespolowy.backend.DataHelpers.DatabaseHelperProfil
 import com.example.projekt_zespolowy.screens.AddCourse
@@ -34,7 +35,7 @@ val dbCouses: DatabaseHelperCourses = DatabaseHelperCourses()
 val dbProfil: DatabaseHelperProfil = DatabaseHelperProfil()
 val dataViewModel: dataViewModel = dataViewModel()
 val dbLoggedProfile: DataHelperLogin = DataHelperLogin()
-
+val dbUserCourseL : DataHelperUserCourse = DataHelperUserCourse()
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
