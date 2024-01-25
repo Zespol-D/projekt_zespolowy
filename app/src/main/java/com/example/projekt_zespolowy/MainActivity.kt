@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.backend.DataHelpers.DataHelperLogin
 import com.example.projekt_zespolowy.backend.DataHelpers.DataHelperUserCourse
+import com.example.projekt_zespolowy.backend.DataHelpers.DataHelperUsers
 import com.example.projekt_zespolowy.backend.DataHelpers.DatabaseHelperCourses
 import com.example.projekt_zespolowy.backend.DataHelpers.DatabaseHelperProfil
 import com.example.projekt_zespolowy.screens.AddCourse
@@ -35,7 +36,8 @@ val dbCouses: DatabaseHelperCourses = DatabaseHelperCourses()
 val dbProfil: DatabaseHelperProfil = DatabaseHelperProfil()
 val dataViewModel: dataViewModel = dataViewModel()
 val dbLoggedProfile: DataHelperLogin = DataHelperLogin()
-val dbUserCourseL : DataHelperUserCourse = DataHelperUserCourse()
+val dbUserCourse : DataHelperUserCourse = DataHelperUserCourse()
+val dbUsers : DataHelperUsers = DataHelperUsers()
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,11 +45,15 @@ class MainActivity : ComponentActivity() {
         dbCouses.connection = Connection()
         dbProfil.connection = Connection()
         dbLoggedProfile.connection = Connection()
+        dbUserCourse.connection = Connection()
+        dbUsers.connection = Connection()
 
 
 
         //Przypisanie danych do konektora
         dbCouses.getCourses()
+        dbUsers.getUsers()
+        dbUserCourse.guery()
         Log.i("MAIL", dataViewModel.specyfic_profil)
 
 

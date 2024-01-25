@@ -2,6 +2,8 @@ package com.example.projekt_zespolowy.ui.theme
 
 import androidx.lifecycle.ViewModel
 import com.example.projekt_zespolowy.backend.dataclasses.Courses
+import com.example.projekt_zespolowy.backend.dataclasses.UserCourse
+import com.example.projekt_zespolowy.backend.dataclasses.Users
 
 class dataViewModel : ViewModel() {
 
@@ -11,7 +13,7 @@ class dataViewModel : ViewModel() {
             specyfic_course = name
         }
 
-    var specyfic_user_id : Int = 0
+    var specyfic_user_id : Int = 3
 
     fun UpdateSpecyficUserId(id : Int){
         specyfic_user_id = id
@@ -26,6 +28,11 @@ class dataViewModel : ViewModel() {
         return specyfic_profil
     }
 
+    var actural_course : Int = 0
+
+    fun updateCourse(Id : Int){
+        actural_course = Id
+    }
     fun clearData(){
         specyfic_profil=""
         specyfic_course=""
@@ -33,7 +40,7 @@ class dataViewModel : ViewModel() {
     }
 
 
-    fun GetCousesForUser(List : List<Courses>, UserID: Int): MutableList<Courses>{
+    fun GetCouses(List : ArrayList<Courses>, UserID: Int): MutableList<Courses>{
         var MutableList = mutableListOf<Courses>()
         for( item in List)
         {
@@ -42,8 +49,38 @@ class dataViewModel : ViewModel() {
         }
 
         return MutableList
-
-
     }
 
+
+    fun GetUsersForCourse(List: List<UserCourse>, CourseID : Int) : MutableList<Int>
+    {
+        var howMany : Int = 0
+        var MutableList = mutableListOf<Int>()
+        for(item in List)
+        {
+            if(item.Course_ID == CourseID){
+                MutableList.add(item.User_ID)
+                howMany = howMany + 1
+            }
+        }
+        return MutableList
+    }
+
+    fun GetUsersById(List : List<Users>, List2 : List<Int>) : MutableList<Users>
+    {
+        var MutableList = mutableListOf<Users>()
+        for(user in List){
+            for(index in List2){
+                if(user.ID == index)
+                {
+                    MutableList.add(user)
+                }
+            }
+
+        }
+        return MutableList
+    }
+
+
 }
+

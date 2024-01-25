@@ -1,30 +1,24 @@
 package com.example.projekt_zespolowy.backend.DataHelpers
-
 import Connection
 import android.os.AsyncTask
-import com.example.projekt_zespolowy.backend.dataclasses.Courses
-import com.example.projekt_zespolowy.backend.dataclasses.UserCourse
+import com.example.projekt_zespolowy.backend.dataclasses.Users
 
-class DataHelperUserCourse {
-
-
+class DataHelperUsers {
 
     private var isConnected = false
     private lateinit var query:String
     private var recordCount:Int=0
     private var functionType:Int = 0
-    lateinit var records : ArrayList<UserCourse>
+    lateinit var records : ArrayList<Users>
     lateinit var connection: Connection
 
     inner class SyncData : AsyncTask<String,String,String>(){
         private var message = "No Connection or Windows FireWall"
         override fun onPreExecute() {
-            records = ArrayList<UserCourse>()
+            records = ArrayList<Users>()
             records.clear()
             recordCount = 0;
-
         }
-
         override fun doInBackground(vararg params: String?): String {
             var myConn = connection?.conn()
             if(myConn == null){
@@ -37,9 +31,12 @@ class DataHelperUserCourse {
                     while (cursor!!.next()) {
                         try {
                             records?.add(
-                                UserCourse(
-                                    cursor!!.getInt("Course_ID"),
-                                    cursor!!.getInt("User_ID")
+                                Users(
+
+                                    cursor!!.getInt("ID"),
+                                    cursor!!.getString("FirstName"),
+                                    cursor!!.getString("LastName")
+
                                 )
                             )
                             recordCount++
@@ -58,12 +55,11 @@ class DataHelperUserCourse {
             return message
         }
     }
-
-
-    fun guery(){
-        query = "SELECT Course_ID, User_ID FROM dbo.Course_joining_users"
+    fun getUsers(){
+        query = "SELECT ID, FirstName, LastName FROM dbo.Users"
         SyncData().execute("")
     }
+
 
 
 }

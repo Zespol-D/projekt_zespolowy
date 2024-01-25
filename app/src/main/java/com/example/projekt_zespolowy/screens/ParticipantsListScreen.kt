@@ -15,10 +15,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.Location
+import com.example.projekt_zespolowy.backend.dataclasses.Courses
+import com.example.projekt_zespolowy.backend.dataclasses.UserCourse
+import com.example.projekt_zespolowy.backend.dataclasses.Users
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
 import com.example.projekt_zespolowy.components.infoContainers
+import com.example.projekt_zespolowy.dataViewModel
 import com.example.projekt_zespolowy.dbCouses
+import com.example.projekt_zespolowy.dbUserCourse
+import com.example.projekt_zespolowy.dbUsers
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -27,6 +33,13 @@ fun ParticipantsListScreen(onClick: (String) -> Unit) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val currentLocation by remember { mutableStateOf(Location.PARTICIPANTS) } // tutaj zmiana stanu ikony na wypełnioną
+
+
+    var coursesPerUser : MutableList<Courses>
+    coursesPerUser = dataViewModel.GetCouses(dbCouses.records, dataViewModel.specyfic_user_id)
+    var Users : MutableList<Int>
+    Users = dataViewModel.GetUsersForCourse(dbUserCourse.records, dataViewModel.actural_course)
+    var Lastly : MutableList<Users> = dataViewModel.GetUsersById(dbUsers.records, Users)
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -63,7 +76,7 @@ fun ParticipantsListScreen(onClick: (String) -> Unit) {
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        items( dbCouses.records.size) { index ->
+                        items( Lastly.size) { index ->
 
                             Box(
                                 modifier = Modifier
@@ -89,11 +102,17 @@ fun ParticipantsListScreen(onClick: (String) -> Unit) {
                                 ) {
                                     Text(
                                         //Nazwa kusu
-                                        text = "${dbCouses.records[index].Course_name}",
+                                        text = "${coursesPerUser[index].Course_name}",
                                         fontSize = 14.sp,
                                         textAlign = TextAlign.Center,
                                     )
-                                    // tutaj będzie ilość zapisanych uczestników
+                                    Text(
+                                        //Tutaj chcę mieć drugie lazy coulumn z wyświtlaniem danych z
+                                        //Lastly od size
+                                        text = "${coursesPerUser.size}",
+                                        fontSize = 14.sp,
+                                        textAlign = TextAlign.Center,
+                                    )
 
                                 }
                             }

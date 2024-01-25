@@ -22,11 +22,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.compose.rememberNavController
 import com.example.projekt_zespolowy.Location
+import com.example.projekt_zespolowy.backend.dataclasses.UserCourse
 import com.example.projekt_zespolowy.components.DrawerContent
 import com.example.projekt_zespolowy.components.TopBar
 import com.example.projekt_zespolowy.components.infoContainers
 import com.example.projekt_zespolowy.dataViewModel
 import com.example.projekt_zespolowy.dbCouses
+import com.example.projekt_zespolowy.dbUserCourse
+
 
 @Composable
 fun showToast(context: Context, message: String) {
@@ -106,6 +109,7 @@ fun MainScreen1(onClick: (String) -> Unit) {
                                             //Co robi tan onclikc i czy może przekazywać więcej wartości niż ta jedna?
                                             onClick("detaleKursu")
                                             dataViewModel.updatePerson(dbCouses.records[index].Course_name)
+                                            dataViewModel.updateCourse(dbCouses.records[index].ID)
                                             Toast
                                                 .makeText(
                                                     context,
@@ -159,7 +163,7 @@ fun MainScreen1(onClick: (String) -> Unit) {
                                 onClick("listaUczestnikow")
                             }
                         ) {
-                            Text(text = "Ilość uczestników")
+                            Text(text = "Moje Kursy")
                         }
                     }
                 }
