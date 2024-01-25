@@ -109,7 +109,7 @@ fun ParticipantsListScreen(onClick: (String) -> Unit) {
                                     textAlign = TextAlign.Center,
                                 )
 
-                                // Other content for each item
+
                                 this@LazyColumn.items(Lastly.size) { innerIndex ->
                                     Row(
                                         modifier = Modifier.fillMaxWidth(),
