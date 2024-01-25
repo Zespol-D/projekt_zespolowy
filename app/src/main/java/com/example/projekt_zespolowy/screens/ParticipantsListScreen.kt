@@ -1,5 +1,6 @@
 package com.example.projekt_zespolowy.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -36,11 +37,15 @@ fun ParticipantsListScreen(onClick: (String) -> Unit) {
 
 
     var coursesPerUser : MutableList<Courses>
-    coursesPerUser = dataViewModel.GetCouses(dbCouses.records, dataViewModel.specyfic_user_id)
+    Log.d("specyficUSerId", dataViewModel.specyfic_user_id.toString())
+    coursesPerUser = dataViewModel.GetCouses(dbCouses.records, 1)
+    Log.d("IleKursów", coursesPerUser.size.toString() )
+    Log.d("Jaki kurs" , dataViewModel.actural_course.toString())
     var Users : MutableList<Int>
     Users = dataViewModel.GetUsersForCourse(dbUserCourse.records, dataViewModel.actural_course)
+    Log.d("Ile Userów", Users.size.toString())
     var Lastly : MutableList<Users> = dataViewModel.GetUsersById(dbUsers.records, Users)
-
+    Log.d("Ile Lastly", Lastly.size.toString())
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -76,7 +81,7 @@ fun ParticipantsListScreen(onClick: (String) -> Unit) {
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        items( Lastly.size) { index ->
+                        items( coursesPerUser.size) { index ->
 
                             Box(
                                 modifier = Modifier
@@ -109,7 +114,7 @@ fun ParticipantsListScreen(onClick: (String) -> Unit) {
                                     Text(
                                         //Tutaj chcę mieć drugie lazy coulumn z wyświtlaniem danych z
                                         //Lastly od size
-                                        text = "${coursesPerUser.size}",
+                                        text = "${Lastly[0].FirstName}",
                                         fontSize = 14.sp,
                                         textAlign = TextAlign.Center,
                                     )

@@ -13,7 +13,7 @@ class dataViewModel : ViewModel() {
             specyfic_course = name
         }
 
-    var specyfic_user_id : Int = 3
+    var specyfic_user_id : Int = 1
 
     fun UpdateSpecyficUserId(id : Int){
         specyfic_user_id = id
@@ -28,7 +28,7 @@ class dataViewModel : ViewModel() {
         return specyfic_profil
     }
 
-    var actural_course : Int = 0
+    var actural_course : Int = 1
 
     fun updateCourse(Id : Int){
         actural_course = Id
