@@ -74,79 +74,77 @@ fun ParticipantsListScreen(onClick: (String) -> Unit) {
                     colors = CardDefaults.cardColors(
                         containerColor = colorScheme.tertiaryContainer
                     )
+                ) {LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        items( coursesPerUser.size) { index ->
+                    // Header or other items can be added here before the main list
+                    items(coursesPerUser.size) { index ->
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp)
+                                .background(
+                                    colorScheme.surface,
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                                .border(
+                                    1.dp,
+                                    colorScheme.onSurface,
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                        ) {
 
-                            Box(
+                            Column(
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(8.dp)
-                                    .background(
-                                        colorScheme.surface,
-                                        shape = MaterialTheme.shapes.medium
-                                    )
-                                    .border(
-                                        1.dp,
-                                        colorScheme.onSurface,
-                                        shape = MaterialTheme.shapes.medium
-                                    )
-
+                                    .padding(16.dp)
+                                    .fillMaxWidth(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
                             ) {
-                                Column(
-                                    modifier = Modifier
-                                        .padding(16.dp)
-                                        .fillMaxWidth(),
-                                    verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    Text(
-                                        //Nazwa kusu
-                                        text = "${coursesPerUser[index].Course_name}",
-                                        fontSize = 14.sp,
-                                        textAlign = TextAlign.Center,
-                                    )
-                                    /*
-                                    Text(
-                                        //Tutaj chcę mieć drugie lazy coulumn z wyświtlaniem danych z
-                                        //Lastly od size
-                                        text = "${Lastly[0].FirstName}",
-                                        fontSize = 14.sp,
-                                        textAlign = TextAlign.Center,
-                                    )*/
+                                Text(
+                                    text = "${coursesPerUser[index].Course_name}",
+                                    fontSize = 14.sp,
+                                    textAlign = TextAlign.Center,
+                                )
 
-                                    LazyColumn {
-                                        items(Lastly.size) { index ->
-                                            Row(
-                                                modifier = Modifier.fillMaxWidth(),
-                                                horizontalArrangement = Arrangement.SpaceBetween
-                                            ) {
-                                                Text(
-                                                    text = "${Lastly[index].FirstName}",
-                                                    fontSize = 14.sp,
-                                                    textAlign = TextAlign.Center,
-                                                )
-                                                Text(
-                                                    text = "${Lastly[index].LastName}",
-                                                    fontSize = 14.sp,
-                                                    textAlign = TextAlign.Center,
-                                                )
-                                            }
-                                        }
+                                // Other content for each item
+                                this@LazyColumn.items(Lastly.size) { innerIndex ->
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.Center
+
+
+                                    ) {
+                                        Text(
+                                            text = "${Lastly[innerIndex].FirstName}",
+                                            fontSize = 14.sp,
+                                            textAlign = TextAlign.Center,
+                                        )
+                                        Text(
+                                            text = " ",
+                                            fontSize = 14.sp,
+                                            textAlign = TextAlign.Center,
+                                        )
+                                        Text(
+                                            text = "${Lastly[innerIndex].LastName}",
+                                            fontSize = 14.sp,
+                                            textAlign = TextAlign.Center,
+                                        )
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
-        }
-    }
-}
+
+                }
+                                }
+                            }
+                        }
+                    }
+
 
 @Preview
 @Composable
