@@ -23,6 +23,7 @@ import com.example.projekt_zespolowy.screens.CourseDetails
 import com.example.projekt_zespolowy.screens.HomeScreen
 import com.example.projekt_zespolowy.screens.LoginScreen
 import com.example.projekt_zespolowy.screens.MainScreen1
+import com.example.projekt_zespolowy.screens.ParticipantsListScreen
 import com.example.projekt_zespolowy.screens.RegisterScreen
 import com.example.projekt_zespolowy.screens.YourProfile
 import com.example.projekt_zespolowy.ui.theme.Projekt_zespolowyTheme
@@ -106,6 +107,11 @@ class MainActivity : ComponentActivity() {
                             AddCourse(onClick = {
                                 navController.navigate(it)
                             })
+                        }
+                        composable("listaUczestnikow") {
+                            ParticipantsListScreen(onClick = {
+                                    navController.navigate(it)}
+                            )
                         }
                     }
                 }

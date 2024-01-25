@@ -155,6 +155,21 @@ fun AddCourseContent() {
     }
 }
 @Composable
+fun Participants() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
+            .background(MaterialTheme.colorScheme.background)
+            .padding(start = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(text = "Ilość zapisanych uczestników",
+            fontSize = 18.sp)
+    }
+}
+@Composable
 fun CourseDetailsContent() {
     Row(modifier = Modifier
         .fillMaxWidth()
@@ -243,6 +258,9 @@ fun TopBar(contentPadding: PaddingValues,
                     Location.LOG_OUT -> {
                         // zawartość dla wylogowania
                     }
+                    Location.PARTICIPANTS -> {
+                        Participants()
+                    }
                 }
             }
         }
@@ -260,7 +278,7 @@ fun TopBarPreview() {
         scope = rememberCoroutineScope(),
         drawerState = rememberDrawerState(DrawerValue.Closed),
         onClick = { },
-        currentLocation = Location.HOME,
+        currentLocation = Location.PARTICIPANTS,
         infoContainers = emptyList(),
     )
 }

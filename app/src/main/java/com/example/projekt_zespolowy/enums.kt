@@ -8,5 +8,6 @@ enum class Location {
     PROFILE, // dla ekranu profilu użytkownika
     EDITABLE_PROFILE, // dla ekranu gdzie możemy edytować profil użytkownika
     SETTINGS, // dla ekranu ustawień
-    LOG_OUT // dla wylogowania ale na razie bez pomysłu
+    LOG_OUT, // dla wylogowania ale na razie bez pomysłu
+    PARTICIPANTS, // dla ekranu pokazującego ilość uczestników
 }
